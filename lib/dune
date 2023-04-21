@@ -1,5 +1,6 @@
 (library
- (name arith))
+ (name arith)
+ (libraries stdio compiler-libs.common))
 
 (ocamllex lexer)
-(menhir (modules parser))
+(menhir (modules grammar))

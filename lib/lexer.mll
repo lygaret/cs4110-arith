@@ -1,5 +1,9 @@
 {
-  open Parser
+  open Grammar
+  exception LexError of string
+
+  let[@inline] failwith msg = raise (LexError msg)
+  let[@inline] illegal c    = failwith (Printf.sprintf "[lexer] unexpected char: '%c'" c)
 }
 
 let whitespace  = [' ' '\r' '\t' '\n']
@@ -21,3 +25,5 @@ rule token = parse
 
   | integer            { INT (int_of_string (Lexing.lexeme lexbuf)) }
   | ident+             { VAR (Lexing.lexeme lexbuf) }
+
+  | _ as c             { illegal c }
