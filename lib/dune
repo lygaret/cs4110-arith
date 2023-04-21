@@ -1,0 +1,5 @@
+(library
+ (name arith))
+
+(ocamllex lexer)
+(menhir (modules parser))
